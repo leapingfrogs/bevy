@@ -824,7 +824,10 @@ pub(crate) fn write_atmosphere_buffer(
     atmosphere_entity: Query<(&GpuAtmosphere, &GpuAtmosphereSettings), With<Camera3d>>,
     mut atmosphere_buffer: ResMut<AtmosphereBuffer>,
 ) {
-    let Ok((atmosphere, settings)) = atmosphere_entity.single() else {
+    // Use `iter().next()` instead of `single()` so that multi-camera setups
+    // (e.g. XR stereo, split-screen) work correctly. The atmosphere parameters
+    // are identical across cameras, so any one will do for the global buffer.
+    let Some((atmosphere, settings)) = atmosphere_entity.iter().next() else {
         return;
     };
 
