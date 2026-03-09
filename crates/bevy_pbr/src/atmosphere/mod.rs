@@ -34,7 +34,7 @@
 //! [Unreal Engine Implementation]: https://github.com/sebh/UnrealEngineSkyAtmosphere
 
 mod environment;
-mod node;
+pub mod node;
 pub mod resources;
 
 use bevy_app::{App, Plugin, Update};

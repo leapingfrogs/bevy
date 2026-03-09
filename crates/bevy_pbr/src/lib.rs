@@ -24,7 +24,7 @@ pub mod experimental {
     }
 }
 
-mod atmosphere;
+pub mod atmosphere;
 mod cluster;
 mod components;
 pub mod contact_shadows;
