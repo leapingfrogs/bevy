@@ -239,7 +239,15 @@ impl RenderGraphRunner {
                     #[cfg(feature = "trace")]
                     let _span = info_span!("node", name = node_state.type_name).entered();
 
+                    render_context
+                        .command_encoder()
+                        .insert_debug_marker(&format!("Start Node: {}", node_state.type_name));
+
                     node_state.node.run(&mut context, render_context, world)?;
+
+                    render_context
+                        .command_encoder()
+                        .insert_debug_marker(&format!("End Node: {}", node_state.type_name));
                 }
 
                 for run_sub_graph in context.finish() {
